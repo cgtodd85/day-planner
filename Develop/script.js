@@ -1,4 +1,7 @@
-var currentDay = [
+const scheduleContainer = $(".container");
+let formEl = $('<form><input type="text" placeholder="what to do?"/></form>');
+
+let currentDay = [
   {
     id: "0",
     hour: "09",
@@ -70,3 +73,9 @@ var currentDay = [
     reminder: "",
   },
 ];
+
+function createSchedule() {
+  scheduleContainer.append(formEl);
+}
+
+createSchedule();

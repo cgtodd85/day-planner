@@ -1,5 +1,7 @@
 const scheduleContainer = $(".container");
-let formEl = $('<form><input type="text" placeholder="what to do?"/></form>');
+let formEl = $(
+  '<form class="row"><div class="col-md-2 hour">09am</div><div class="col-md-9 description p-0"><textarea id="0" class="past"></textarea></div><button class="col-md-1 saveBtn"><i class="far fa-save fa-lg"></i></button></form><form class="row"><div class="col-md-2 hour">10am</div><div class="col-md-9 description p-0"><textarea id="1" class="past"></textarea></div><button class="col-md-1 saveBtn"><i class="far fa-save fa-lg"></i></button></form><form class="row"><div class="col-md-2 hour">11am</div><div class="col-md-9 description p-0"><textarea id="2" class="past"></textarea></div><button class="col-md-1 saveBtn"><i class="far fa-save fa-lg"></i></button></form><form class="row"><div class="col-md-2 hour">12pm</div><div class="col-md-9 description p-0"><textarea id="3" class="past"></textarea></div><button class="col-md-1 saveBtn"><i class="far fa-save fa-lg"></i></button></form><form class="row"><div class="col-md-2 hour">01pm</div><div class="col-md-9 description p-0"><textarea id="4" class="present"></textarea></div><button class="col-md-1 saveBtn"><i class="far fa-save fa-lg"></i></button></form><form class="row"><div class="col-md-2 hour">02pm</div><div class="col-md-9 description p-0"><textarea id="5" class="future"></textarea></div><button class="col-md-1 saveBtn"><i class="far fa-save fa-lg"></i></button></form><form class="row"><div class="col-md-2 hour">03pm</div><div class="col-md-9 description p-0"><textarea id="6" class="future"></textarea></div><button class="col-md-1 saveBtn"><i class="far fa-save fa-lg"></i></button></form><form class="row"><div class="col-md-2 hour">04pm</div><div class="col-md-9 description p-0"><textarea id="7" class="future"></textarea></div><button class="col-md-1 saveBtn"><i class="far fa-save fa-lg"></i></button></form><form class="row"><div class="col-md-2 hour">05pm</div><div class="col-md-9 description p-0"><textarea id="8" class="future"></textarea></div><button class="col-md-1 saveBtn"><i class="far fa-save fa-lg"></i></button></form></div>'
+);
 
 let currentDay = [
   {
@@ -74,8 +76,26 @@ let currentDay = [
   },
 ];
 
+function storeCurrentDay() {
+  localStorage.setItem("currentDay", JSON.stringify(currentDay));
+}
+
 function createSchedule() {
   scheduleContainer.append(formEl);
 }
 
+storeCurrentDay();
 createSchedule();
+/* 
+create table 
+time section, input section, save button
+
+set current day as local storage
+
+input into form should have function to save to local storage
+and set as the value of the form
+
+
+
+
+*/

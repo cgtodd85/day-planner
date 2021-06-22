@@ -1,7 +1,11 @@
 const scheduleContainer = $(".container");
-let formEl = $(
-  '<form class="row"><div class="col-md-2 hour">09am</div><div class="col-md-9 description p-0"><textarea id="0" class="past"></textarea></div><button class="col-md-1 saveBtn"><i class="far fa-save fa-lg"></i></button></form><form class="row"><div class="col-md-2 hour">10am</div><div class="col-md-9 description p-0"><textarea id="1" class="past"></textarea></div><button class="col-md-1 saveBtn"><i class="far fa-save fa-lg"></i></button></form><form class="row"><div class="col-md-2 hour">11am</div><div class="col-md-9 description p-0"><textarea id="2" class="past"></textarea></div><button class="col-md-1 saveBtn"><i class="far fa-save fa-lg"></i></button></form><form class="row"><div class="col-md-2 hour">12pm</div><div class="col-md-9 description p-0"><textarea id="3" class="past"></textarea></div><button class="col-md-1 saveBtn"><i class="far fa-save fa-lg"></i></button></form><form class="row"><div class="col-md-2 hour">01pm</div><div class="col-md-9 description p-0"><textarea id="4" class="present"></textarea></div><button class="col-md-1 saveBtn"><i class="far fa-save fa-lg"></i></button></form><form class="row"><div class="col-md-2 hour">02pm</div><div class="col-md-9 description p-0"><textarea id="5" class="future"></textarea></div><button class="col-md-1 saveBtn"><i class="far fa-save fa-lg"></i></button></form><form class="row"><div class="col-md-2 hour">03pm</div><div class="col-md-9 description p-0"><textarea id="6" class="future"></textarea></div><button class="col-md-1 saveBtn"><i class="far fa-save fa-lg"></i></button></form><form class="row"><div class="col-md-2 hour">04pm</div><div class="col-md-9 description p-0"><textarea id="7" class="future"></textarea></div><button class="col-md-1 saveBtn"><i class="far fa-save fa-lg"></i></button></form><form class="row"><div class="col-md-2 hour">05pm</div><div class="col-md-9 description p-0"><textarea id="8" class="future"></textarea></div><button class="col-md-1 saveBtn"><i class="far fa-save fa-lg"></i></button></form></div>'
-);
+// let formEl = $(
+//   '<form class="row"><div class="col-md-2 hour">09am</div><div class="col-md-9 description p-0"><textarea id="0" class="past"></textarea></div><button class="col-md-1 saveBtn"></button></form><form class="row"><div class="col-md-2 hour">10am</div><div class="col-md-9 description p-0"><textarea id="1" class="past"></textarea></div><button class="col-md-1 saveBtn"><i class="far fa-save fa-lg"></i></button></form><form class="row"><div class="col-md-2 hour">11am</div><div class="col-md-9 description p-0"><textarea id="2" class="past"></textarea></div><button class="col-md-1 saveBtn"><i class="far fa-save fa-lg"></i></button></form><form class="row"><div class="col-md-2 hour">12pm</div><div class="col-md-9 description p-0"><textarea id="3" class="past"></textarea></div><button class="col-md-1 saveBtn"><i class="far fa-save fa-lg"></i></button></form><form class="row"><div class="col-md-2 hour">01pm</div><div class="col-md-9 description p-0"><textarea id="4" class="present"></textarea></div><button class="col-md-1 saveBtn"><i class="far fa-save fa-lg"></i></button></form><form class="row"><div class="col-md-2 hour">02pm</div><div class="col-md-9 description p-0"><textarea id="5" class="future"></textarea></div><button class="col-md-1 saveBtn"><i class="far fa-save fa-lg"></i></button></form><form class="row"><div class="col-md-2 hour">03pm</div><div class="col-md-9 description p-0"><textarea id="6" class="future"></textarea></div><button class="col-md-1 saveBtn"><i class="far fa-save fa-lg"></i></button></form><form class="row"><div class="col-md-2 hour">04pm</div><div class="col-md-9 description p-0"><textarea id="7" class="future"></textarea></div><button class="col-md-1 saveBtn"><i class="far fa-save fa-lg"></i></button></form><form class="row"><div class="col-md-2 hour">05pm</div><div class="col-md-9 description p-0"><textarea id="8" class="future"></textarea></div><button class="col-md-1 saveBtn"><i class="far fa-save fa-lg"></i></button></form></div>'
+// );
+const saveButtons = $("<button>");
+let buttonEl = $(".saveBtn");
+// let userInput = $('textarea[id = "0"]').val();
+// let userInput = $("<form>").val();
 
 let currentDay = [
   {
@@ -76,6 +80,7 @@ let currentDay = [
   },
 ];
 
+let userInput = $("<textarea>").text;
 function storeCurrentDay() {
   localStorage.setItem("currentDay", JSON.stringify(currentDay));
 }
@@ -84,8 +89,21 @@ function createSchedule() {
   scheduleContainer.append(formEl);
 }
 
-storeCurrentDay();
-createSchedule();
+function saveReminder() {
+  console.log(userInput);
+  userInput = currentDay[0].reminder;
+  storeCurrentDay();
+}
+
+buttonEl.on("click", function (event) {
+  event.preventDefault();
+  let getId = $(this).siblings(".description").children(".future").attr("id");
+  currentDay[getId].reminder = $(this)
+    .siblings(".description")
+    .children(".future")
+    .val();
+  storeCurrentDay();
+});
 /* 
 create table 
 time section, input section, save button
